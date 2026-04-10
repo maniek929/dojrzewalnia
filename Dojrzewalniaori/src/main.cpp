@@ -22,7 +22,7 @@
 #include <ElegantOTA.h>
 
 #include <AsyncWebSerial.h>
-#include <gpio_viewer.h>
+#include <GPIOViewer.h>
 
 const int csvTimeFrameInSeconds = 30;
 const bool saveCsv = true;
@@ -112,7 +112,7 @@ void setup()
 
 	auto *wifiClass = new WifiServerClass(&server, *settings, *sensorData, *context, *configurationService);
 
-	if (settings->wifiSsid == nullptr || settings->wifiSsid == "" || settings->wifiSsid == "null")
+	if (settings->wifiSsid.trim().length() == 0 || settings->wifiSsid.trim() == "null")
 	{
 		Serial.println("Setting up access point");
 		wifiClass->setupAccessPoint();
